@@ -24,4 +24,8 @@ public class UserService {
     public void updateUserById(User user) {
         userMapper.updateUserById(user);
     }
+
+    public void deleteUserById(Long id) {
+        userMapper.deleteUserById(id);
+    }
 }

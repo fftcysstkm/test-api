@@ -14,4 +14,7 @@ public interface UserMapper {
 
     @Select("UPDATE users SET name = #{name}, phone = #{phone}, email = #{email} WHERE id = #{id}")
     void updateUserById(User user);
+
+    @Select("DELETE FROM users WHERE id = #{id}")
+    void deleteUserById(Long id);
 }

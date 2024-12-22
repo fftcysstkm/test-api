@@ -16,18 +16,10 @@ import io.swagger.v3.oas.annotations.tags.Tag;
 @Tag(name = "ユーザー", description = "ユーザー関連のAPI")
 public class UserController {
 
-    
+    private final UserService userService;
 
     public UserController(UserService userService) {
         this.userService = userService;
-    }
-
-    private final UserService userService;
-
-    @Operation(summary = "テスト用API", description = "動作確認用のhelloを返します")
-    @GetMapping("/test")
-    public String hello(){
-        return "hello";
     }
 
     @Operation(summary = "ユーザー一覧取得", description = "ユーザー一覧を取得します")
@@ -41,6 +33,13 @@ public class UserController {
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@RequestBody User request) {
         userService.updateUserById(request);
+        return ResponseEntity.noContent().build();
+    }
+
+    @Operation(summary = "ユーザー削除", description = "指定されたIDのユーザーを削除します")
+    @DeleteMapping("/delete/{id}")
+    public ResponseEntity<Void> deleteUser(@PathVariable Long id) {
+        userService.deleteUserById(id);
         return ResponseEntity.noContent().build();
     }
 
