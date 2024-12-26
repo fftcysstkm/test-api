@@ -29,6 +29,13 @@ public class UserController {
         return ResponseEntity.ok(users);
     }
 
+    @Operation(summary = "ユーザー新規登録", description = "新しいユーザーを登録します")
+    @PostMapping("/create")
+    public ResponseEntity<Void> createUser(@RequestBody User newUser) {
+        userService.createUser(newUser);
+        return ResponseEntity.noContent().build();
+    }
+
     @Operation(summary = "ユーザー更新", description = "指定されたIDのユーザー情報を更新します")
     @PutMapping("/update/{id}")
     public ResponseEntity<Void> update(@RequestBody User request) {

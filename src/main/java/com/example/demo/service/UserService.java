@@ -28,4 +28,11 @@ public class UserService {
     public void deleteUserById(Long id) {
         userMapper.deleteUserById(id);
     }
+
+    public void createUser(User user) {
+        // なぜかh2のauto incrementが動かなかったので
+        var newId = userMapper.getMaxId() + 1;
+        var newUser = user.copyWithId(newId);
+        userMapper.insertUser(newUser);
+    }
 }
